@@ -1,7 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-const INPUT_HEIGHT = 30;
+const INPUT_HEIGHT = 35;
 const BORDER_RADIUS = 4;
-const ICON_SIZE = 25;
+const ICON_SIZE = 30;
 
 const styles = EStyleSheet.create({
     text: {
@@ -17,6 +17,7 @@ const styles = EStyleSheet.create({
     contentWraper: {
         alignItems: 'center',
         flexDirection: 'row',
+        paddingBottom: 20,
     },
     icon: {
         tintColor: '$defaultPurple',

@@ -4,15 +4,19 @@ import {View, Text, TouchableHighlight, TextInput, Image} from 'react-native';
 import styles from './styles';
 
 const TextInputWithTitle = (props) =>{
-    const {text, secureTextEntry} = props;
+    const {text, secureTextEntry, iconName} = props;
     return(  
         <View style={styles.contentWraper}>
             <View>
-            {secureTextEntry ? <Image source={require('./images/lock.png')} style={styles.icon}/> : <Image source={require('./images/user.png')} style={styles.icon}/>}
+            {iconName ==="lock" ? <Image source={require(`./images/lock.png`)} style={styles.icon}/> : 
+            iconName === "email" ? <Image source={require(`./images/email.png`)} style={styles.icon}/> :
+            iconName === "phone" ? <Image source={require(`./images/phone.png`)} style={styles.icon}/> :
+            iconName === "user" ? <Image source={require(`./images/user.png`)} style={styles.icon}/> :
+             <Image source={require(`./images/twobars.png`)} style={styles.icon}/> }
             </View>
             <View style={styles.wraper}>
                 <Text style={styles.text}>{text}</Text>
-                <TextInput secureTextEntry={secureTextEntry} underlineColorAndroid='rgb(250,250,250)' style={styles.input}/>
+                <TextInput secureTextEntry={secureTextEntry} underlineColorAndroid='#9e9e9e' style={styles.input}/>
             </View>
         </View>
     )
@@ -20,6 +24,7 @@ const TextInputWithTitle = (props) =>{
 TextInputWithTitle.proptypes ={
     text: PropTypes.string,
     secureTextEntry: PropTypes.bool,
-    value: PropTypes.string
+    value: PropTypes.string,
+    iconName: PropTypes.string,
 }
 export default TextInputWithTitle;
