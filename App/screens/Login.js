@@ -42,8 +42,7 @@ class Login extends Component {
     render() {
         return(
             <Container>
-                <View>
-                    <KeyboardAvoidingView behavior="padding">
+                    <KeyboardAvoidingView behavior="position">
                         <LoginTitle/>
                         <View style={styles.container}>
                             <TextInputWithTitle text="EMAIL" iconName="user" onChangeText={(input)=>this.setState({email: input})}/>
@@ -61,7 +60,6 @@ class Login extends Component {
                             </View>
                         </View>
                     </KeyboardAvoidingView>
-                </View>
             </Container>
         )
     }
