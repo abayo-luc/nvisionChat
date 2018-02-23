@@ -4,7 +4,7 @@ import {View, Text, TouchableHighlight, TextInput, Image} from 'react-native';
 import styles from './styles';
 
 const TextInputWithTitle = (props) =>{
-    const {text, secureTextEntry, iconName} = props;
+    const {text, secureTextEntry, iconName, onChangeText} = props;
     return(  
         <View style={styles.contentWraper}>
             <View>
@@ -16,7 +16,7 @@ const TextInputWithTitle = (props) =>{
             </View>
             <View style={styles.wraper}>
                 <Text style={styles.text}>{text}</Text>
-                <TextInput secureTextEntry={secureTextEntry} underlineColorAndroid='#9e9e9e' style={styles.input}/>
+                <TextInput secureTextEntry={secureTextEntry} underlineColorAndroid='#9e9e9e' style={styles.input} onChangeText={onChangeText} />
             </View>
         </View>
     )
@@ -26,5 +26,6 @@ TextInputWithTitle.proptypes ={
     secureTextEntry: PropTypes.bool,
     value: PropTypes.string,
     iconName: PropTypes.string,
+    onChangeText: PropTypes.func,
 }
 export default TextInputWithTitle;

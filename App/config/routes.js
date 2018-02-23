@@ -13,9 +13,9 @@ const HomeStack = StackNavigator({
     },
     Dashboard: {
         screen: Dashboard,
-        navigationOptions: {
-            header: ()=>null,
-        }
+        navigationOptions: ({navigation})=>({
+            title: navigation.state.params.title,
+        }),
     }
 })
 
