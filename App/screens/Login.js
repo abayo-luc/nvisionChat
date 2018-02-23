@@ -6,19 +6,36 @@ import Container from '../components/Container/Container';
 import LoginTitle from '../components/Text/LoginTitle';
 import TextInputWithTitle from '../components/TextInput/TextInputWithTitle';
 import LargeButton from '../components/Button/LargeButton';
+import firebase from 'firebase';
 
 class Login extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            password: '',
+            phone: '',
+        };
+    }
     static propTypes ={
         navigation: PropTypes.object,
     }
     handleGetStarted = () =>{
-        console.log('get started press')
-        this.props.navigation.navigate('Dashboard')
+        const {email, password} = this.state;
+        try{
+            firebase.auth().signInWithEmailAndPassword(email, password).then((user) => this.nextToDashboard(user.email))
+        }
+        catch(error){
+            alert(error.toString())
+            firebase.auth().signOut()
+        }
     };
     handleCreateAccount = () => {
         console.log('Create account')
         this.props.navigation.navigate('SignUp')
     };
+    nextToDashboard = (userEmail) => {
+        this.props.navigation.navigate('Dashboard', {title: userEmail})
+    }
     handleResetPassword = () => {
         console.log('reset password pressed')
     };
@@ -29,10 +46,10 @@ class Login extends Component {
                     <KeyboardAvoidingView behavior="padding">
                         <LoginTitle/>
                         <View style={styles.container}>
-                            <TextInputWithTitle text="USERNAME" iconName="user" />
-                            <TextInputWithTitle text="PASSWORD" iconName="lock" secureTextEntry={true} />
+                            <TextInputWithTitle text="EMAIL" iconName="user" onChangeText={(input)=>this.setState({email: input})}/>
+                            <TextInputWithTitle text="PASSWORD" iconName="lock" secureTextEntry={true} onChangeText={(input) => this.setState({password: input})} />
                             <View style={styles.buttonWraper}>
-                                <LargeButton text="Get Started" onPress={() => this.handleGetStarted()}/>
+                                <LargeButton text="Login" onPress={() => this.handleGetStarted()}/>
                             </View>
                             <View style={styles.textLink}>
                                 <TouchableOpacity onPress={() => this.handleCreateAccount()}>
